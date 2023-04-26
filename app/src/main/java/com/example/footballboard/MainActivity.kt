@@ -3,6 +3,7 @@ package com.example.footballboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -12,7 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FootballBoardTheme {
-
+                AppScreen()
             }
         }
     }
