@@ -13,11 +13,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.footballboard.screen.navigationbar.FavoriteScreen
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
+import com.example.footballboard.utils.Routes.FAVORITE_SCREEN
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.PROFILE_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
@@ -69,6 +71,9 @@ fun AppScreen(
                         }
                         composable(route = HOME_SCREEN) {
                             HomeScreen()
+                        }
+                        composable(route = FAVORITE_SCREEN) {
+                            FavoriteScreen()
                         }
                         composable(route = PROFILE_SCREEN) {
                             ProfileScreen(
