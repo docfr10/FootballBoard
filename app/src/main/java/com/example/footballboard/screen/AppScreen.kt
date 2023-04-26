@@ -20,6 +20,7 @@ import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
+import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -32,13 +33,15 @@ fun AppScreen(
     auth: FirebaseAuth,
     cUser: FirebaseUser?,
     window: Window,
-    signInWithGoogleLauncher: ActivityResultLauncher<Intent>
+    signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
+    authenticationViewModel: AuthenticationViewModel
 ) {
     Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
             content = { paddingValues ->
                 NavHostContainer(
                     auth = auth,
+                    authenticationViewModel = authenticationViewModel,
                     cUser = cUser,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     paddingValues = paddingValues,
@@ -56,7 +59,8 @@ private fun NavHostContainer(
     auth: FirebaseAuth,
     cUser: FirebaseUser?,
     window: Window,
-    signInWithGoogleLauncher: ActivityResultLauncher<Intent>
+    signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
+    authenticationViewModel: AuthenticationViewModel
 ) {
     val animatedNavController = rememberAnimatedNavController()
     val context = LocalContext.current
@@ -73,6 +77,7 @@ private fun NavHostContainer(
             composable(route = AUTHENTICATION_SCREEN) {
                 AuthenticationScreen(
                     auth = auth,
+                    authenticationViewModel = authenticationViewModel,
                     animatedNavController = animatedNavController,
                     context = context,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,

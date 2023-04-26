@@ -6,8 +6,10 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
+import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
@@ -32,12 +34,16 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    // ViewModel objects
+    private val authenticationViewModel: AuthenticationViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FootballBoardTheme {
                 AppScreen(
                     auth = auth,
+                    authenticationViewModel = authenticationViewModel,
                     cUser = cUser,
                     window = window,
                     signInWithGoogleLauncher = signInWithGoogleLauncher

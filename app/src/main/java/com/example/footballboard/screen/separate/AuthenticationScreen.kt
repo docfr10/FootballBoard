@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.footballboard.R
+import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +35,8 @@ fun AuthenticationScreen(
     animatedNavController: NavHostController,
     context: Context,
     window: Window,
-    signInWithGoogleLauncher: ActivityResultLauncher<Intent>
+    signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
+    authenticationViewModel: AuthenticationViewModel
 ) {
     // Raise the elements above the keyboard
     var shouldResize = false // False will resize
@@ -115,14 +117,12 @@ fun AuthenticationScreen(
         Button(
             onClick = {
                 // Check the registration
-                /*
                 authenticationViewModel.checkRegistration(
                     context = context,
                     auth = auth,
                     email = email,
                     password = password
                 )
-                */
             },
             modifier = Modifier
                 .padding(top = 10.dp, start = 5.dp, end = 5.dp)
@@ -132,15 +132,13 @@ fun AuthenticationScreen(
         // SignIn button
         Button(
             onClick = { // Authorized user login
-                /*
                 authenticationViewModel.checkAuthorized(
                     context = context,
                     auth = auth,
                     email = email,
                     password = password,
-                    navController = navController
+                    animatedNavController = animatedNavController
                 )
-                */
             },
             modifier = Modifier
                 .padding(start = 5.dp, end = 5.dp)
@@ -150,12 +148,10 @@ fun AuthenticationScreen(
         // SignIn with Google button
         Button(
             onClick = { // Authorized user with Google login
-                /*
                 authenticationViewModel.getClient(
                     context = context,
                     signInWithGoogleLauncher = signInWithGoogleLauncher
                 )
-                */
             },
             modifier = Modifier
                 .padding(start = 5.dp, end = 5.dp)
