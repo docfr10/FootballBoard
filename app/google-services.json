@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "367052701724",
+    "project_id": "footballboard-c0fae",
+    "storage_bucket": "footballboard-c0fae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367052701724:android:ac4b6831f37bfc3d42dfd9",
+        "android_client_info": {
+          "package_name": "com.example.footballboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367052701724-7oj0vgds5thn3dr36pqc30mvqifmfcr4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.footballboard",
+            "certificate_hash": "7383e4a6b5aa086f25eb85e28c0130d18bb5d634"
+          }
+        },
+        {
+          "client_id": "367052701724-6pjtfrjsh1rt7g7m8jfiqdomh0if3jh7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBFAE68LakUihutI83ORE77ah89Y_xbes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367052701724-6pjtfrjsh1rt7g7m8jfiqdomh0if3jh7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
