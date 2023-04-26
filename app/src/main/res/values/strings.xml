@@ -11,4 +11,7 @@
     <string name="user_exist">User is already exist</string>
     <string name="check_email_and_password">Please check that your email address and password are correct</string>
     <string name="enter_email_and_password">Please enter an email address and a password</string>
+    <string name="you_logged">You are logged in as:</string>
+    <string name="click_again">Click again to log out</string>
+    <string name="log_out">Log out</string>
 </resources>

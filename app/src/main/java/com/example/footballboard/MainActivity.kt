@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
 import com.example.footballboard.viewModel.AuthenticationViewModel
+import com.example.footballboard.viewModel.ProfileViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
 
     // ViewModel objects
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +47,9 @@ class MainActivity : ComponentActivity() {
                     auth = auth,
                     authenticationViewModel = authenticationViewModel,
                     cUser = cUser,
-                    window = window,
-                    signInWithGoogleLauncher = signInWithGoogleLauncher
+                    signInWithGoogleLauncher = signInWithGoogleLauncher,
+                    profileViewModel = profileViewModel,
+                    window = window
                 )
             }
         }

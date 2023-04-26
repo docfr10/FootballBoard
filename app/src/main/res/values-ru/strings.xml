@@ -11,4 +11,7 @@
     <string name="user_exist">Пользователь уже существует</string>
     <string name="check_email_and_password">Пожалуйста, проверьте правильность вашего адреса электронной почты и пароля</string>
     <string name="enter_email_and_password">Пожалуйста, введите адрес электронной почты и пароль</string>
+    <string name="you_logged">Вы вошли как:</string>
+    <string name="click_again">Нажмите еще раз чтобы выйти</string>
+    <string name="log_out">Выйти</string>
 </resources>
