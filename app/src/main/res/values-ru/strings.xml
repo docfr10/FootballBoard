@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Футбольная доска</string>
+    <string name="authentication">Аутентификация</string>
+    <string name="email">Электронная почта</string>
+    <string name="example_mail">example@domain.com</string>
+    <string name="password">Пароль</string>
+    <string name="registered">Зарегистроваться</string>
+    <string name="sign_in">Войти</string>
+    <string name="google_sign_in">Войти через Google</string>
+</resources>

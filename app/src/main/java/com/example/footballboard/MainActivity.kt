@@ -36,7 +36,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FootballBoardTheme {
-                AppScreen(auth = auth, cUser = cUser)
+                AppScreen(
+                    auth = auth,
+                    cUser = cUser,
+                    window = window,
+                    signInWithGoogleLauncher = signInWithGoogleLauncher
+                )
             }
         }
     }

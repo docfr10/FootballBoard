@@ -1,5 +1,9 @@
 package com.example.footballboard.screen
 
+import android.app.Activity
+import android.content.Intent
+import android.view.Window
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -9,8 +13,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
+import com.example.footballboard.screen.separate.AuthenticationScreen
+import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -21,11 +28,22 @@ import com.google.firebase.auth.FirebaseUser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppScreen(auth: FirebaseAuth, cUser: FirebaseUser?) {
+fun AppScreen(
+    auth: FirebaseAuth,
+    cUser: FirebaseUser?,
+    window: Window,
+    signInWithGoogleLauncher: ActivityResultLauncher<Intent>
+) {
     Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
             content = { paddingValues ->
-                NavHostContainer(auth = auth, cUser = cUser, paddingValues = paddingValues)
+                NavHostContainer(
+                    auth = auth,
+                    cUser = cUser,
+                    signInWithGoogleLauncher = signInWithGoogleLauncher,
+                    paddingValues = paddingValues,
+                    window = window
+                )
             }
         )
     }
@@ -36,9 +54,14 @@ fun AppScreen(auth: FirebaseAuth, cUser: FirebaseUser?) {
 private fun NavHostContainer(
     paddingValues: PaddingValues,
     auth: FirebaseAuth,
-    cUser: FirebaseUser?
+    cUser: FirebaseUser?,
+    window: Window,
+    signInWithGoogleLauncher: ActivityResultLauncher<Intent>
 ) {
     val animatedNavController = rememberAnimatedNavController()
+    val context = LocalContext.current
+    val activity = LocalContext.current as Activity
+
     AnimatedNavHost(
         navController = animatedNavController,
         startDestination = SPLASH_SCREEN,
@@ -46,6 +69,15 @@ private fun NavHostContainer(
         builder = {
             composable(route = SPLASH_SCREEN) {
                 AnimatedSplashScreen(animatedNavController = animatedNavController, cUser = cUser)
+            }
+            composable(route = AUTHENTICATION_SCREEN) {
+                AuthenticationScreen(
+                    auth = auth,
+                    animatedNavController = animatedNavController,
+                    context = context,
+                    signInWithGoogleLauncher = signInWithGoogleLauncher,
+                    window = window
+                )
             }
             composable(route = HOME_SCREEN) {
                 HomeScreen()

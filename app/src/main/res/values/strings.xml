@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FootballBoard</string>
+    <string name="authentication">Authentication</string>
+    <string name="email">Email address</string>
+    <string name="example_mail">example@domain.com</string>
+    <string name="password">Password</string>
+    <string name="registered">Registered</string>
+    <string name="sign_in">Sign in</string>
+    <string name="google_sign_in">Sign in with Google</string>
 </resources>
