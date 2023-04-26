@@ -14,4 +14,5 @@
     <string name="you_logged">Вы вошли как:</string>
     <string name="click_again">Нажмите еще раз чтобы выйти</string>
     <string name="log_out">Выйти</string>
+    <string name="team_name">Название команды</string>
 </resources>
