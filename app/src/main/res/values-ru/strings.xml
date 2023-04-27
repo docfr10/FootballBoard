@@ -15,4 +15,8 @@
     <string name="click_again">Нажмите еще раз чтобы выйти</string>
     <string name="log_out">Выйти</string>
     <string name="team_name">Название команды</string>
+    <string name="home">Главная</string>
+    <string name="profile">Профиль</string>
+    <string name="search">Поиск</string>
+    <string name="favorites">Избранное</string>
 </resources>

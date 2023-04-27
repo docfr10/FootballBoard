@@ -5,6 +5,6 @@ object Routes {
     const val AUTHENTICATION_SCREEN = "authentication"
     const val HOME_SCREEN = "home"
     const val PROFILE_SCREEN = "profile"
-    const val FAVORITE_SCREEN = "favorite"
+    const val FAVORITES_SCREEN = "favorites"
     const val SEARCH_SCREEN = "search"
 }

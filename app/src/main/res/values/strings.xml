@@ -15,4 +15,8 @@
     <string name="click_again">Click again to log out</string>
     <string name="log_out">Log out</string>
     <string name="team_name">Team name</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favourites</string>
 </resources>
