@@ -86,6 +86,17 @@ fun SearchScreen(window: Window, context: Context) {
                     .padding(horizontal = 10.dp, vertical = 10.dp)
             ) {
                 item {
+                    Column(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues = paddingValues),
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = "Sun, 01.01.2023")
+                    }
+                }
+                item {
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Row(
                             modifier = Modifier.fillMaxSize(),
