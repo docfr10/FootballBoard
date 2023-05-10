@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.example.footballboard.network.MainApi
 import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
 import com.example.footballboard.viewModel.AuthenticationViewModel
@@ -16,10 +17,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    // Objects for working with Firebase
+    // Firebase objects
     private val auth = FirebaseAuth.getInstance()
     private var cUser = auth.currentUser
     private val signInWithGoogleLauncher =
@@ -39,6 +42,12 @@ class MainActivity : ComponentActivity() {
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
 
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("http://api.football-data.org/v4/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    private val mainApi = retrofit.create(MainApi::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,6 +58,7 @@ class MainActivity : ComponentActivity() {
                     cUser = cUser,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     profileViewModel = profileViewModel,
+                    mainApi = mainApi,
                     window = window
                 )
             }

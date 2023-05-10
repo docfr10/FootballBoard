@@ -33,13 +33,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.footballboard.R
 import com.example.footballboard.model.navigationbar.BottomNavItemModel
+import com.example.footballboard.network.MainApi
 import com.example.footballboard.screen.navigationbar.FavoritesScreen
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
+import com.example.footballboard.screen.separate.CompetitionsInterest
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
+import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.FAVORITES_SCREEN
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.PROFILE_SCREEN
@@ -61,7 +64,8 @@ fun AppScreen(
     window: Window,
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
     authenticationViewModel: AuthenticationViewModel,
-    profileViewModel: ProfileViewModel
+    profileViewModel: ProfileViewModel,
+    mainApi: MainApi
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -81,7 +85,7 @@ fun AppScreen(
             content = { paddingValues ->
                 AnimatedNavHost(
                     navController = animatedNavController,
-                    startDestination = SPLASH_SCREEN,
+                    startDestination = COMPETITIONS_INTEREST,
                     modifier = Modifier.padding(paddingValues = paddingValues),
                     builder = {
                         composable(route = SPLASH_SCREEN) {
@@ -102,8 +106,11 @@ fun AppScreen(
                             )
                             isShowBottomBar.value = false
                         }
+                        composable(route = COMPETITIONS_INTEREST) {
+                            CompetitionsInterest(context = context, mainApi = mainApi)
+                        }
                         composable(route = HOME_SCREEN) {
-                            HomeScreen()
+                            HomeScreen(mainApi = mainApi)
                             isShowBottomBar.value = true
                         }
                         composable(route = FAVORITES_SCREEN) {
