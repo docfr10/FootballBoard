@@ -137,7 +137,6 @@ fun AuthenticationScreen(
                     auth = auth,
                     email = email,
                     password = password,
-                    animatedNavController = animatedNavController
                 )
             },
             modifier = Modifier

@@ -7,8 +7,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
+import com.example.footballboard.MainActivity
 import com.example.footballboard.R
-import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -47,16 +47,13 @@ class AuthenticationViewModel @Inject constructor() : ViewModel() {
         auth: FirebaseAuth,
         email: MutableState<String>,
         password: MutableState<String>,
-        animatedNavController: NavHostController
     ) {
         if (email.value.isNotEmpty() && password.value.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email.value, password.value)
                 .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        animatedNavController.navigate(HOME_SCREEN) {
-                            popUpTo(animatedNavController.graph.id) { inclusive = true }
-                        }
-                    } else
+                    if (task.isSuccessful)
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                    else
                         Toast.makeText(
                             context,
                             R.string.check_email_and_password,
