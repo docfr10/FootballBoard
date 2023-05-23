@@ -39,8 +39,10 @@ import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
+import com.example.footballboard.screen.separate.AreasInterest
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.screen.separate.CompetitionsInterest
+import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.FAVORITES_SCREEN
@@ -85,7 +87,7 @@ fun AppScreen(
             content = { paddingValues ->
                 AnimatedNavHost(
                     navController = animatedNavController,
-                    startDestination = COMPETITIONS_INTEREST,
+                    startDestination = AREAS_INTEREST,
                     modifier = Modifier.padding(paddingValues = paddingValues),
                     builder = {
                         composable(route = SPLASH_SCREEN) {
@@ -105,6 +107,9 @@ fun AppScreen(
                                 window = window
                             )
                             isShowBottomBar.value = false
+                        }
+                        composable(route = AREAS_INTEREST) {
+                            AreasInterest(context = context, mainApi = mainApi)
                         }
                         composable(route = COMPETITIONS_INTEREST) {
                             CompetitionsInterest(context = context, mainApi = mainApi)
