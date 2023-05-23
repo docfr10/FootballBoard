@@ -49,9 +49,7 @@ fun AreasInterest(mainApi: MainApi, context: Context) {
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            item {
-                Text(text = context.getString(R.string.competitions_interest), fontSize = 16.sp)
-            }
+            item { Text(text = context.getString(R.string.areas_interest), fontSize = 16.sp) }
             areas.value?.let {
                 items(areas.value!!) {
                     Card(modifier = Modifier.fillMaxWidth()) {
