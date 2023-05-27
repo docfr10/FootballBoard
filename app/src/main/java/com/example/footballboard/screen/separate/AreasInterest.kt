@@ -12,8 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,16 +30,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.footballboard.R
 import com.example.footballboard.network.MainApi
 import com.example.footballboard.network.areaModel.Area
+import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AreasInterest(mainApi: MainApi, context: Context) {
+fun AreasInterest(mainApi: MainApi, context: Context, animatedNavController: NavHostController) {
     val areas = remember { mutableStateOf<List<Area>?>(null) }
     val selected = remember { mutableStateOf(emptyList<Int>()) }
 
@@ -87,5 +94,13 @@ fun AreasInterest(mainApi: MainApi, context: Context) {
                 }
             }
         }
+    }, floatingActionButton = {
+        if (selected.value.isNotEmpty())
+        // Button to go to the selection of competitions
+            FloatingActionButton(shape = CircleShape, onClick = {
+                animatedNavController.navigate(COMPETITIONS_INTEREST)
+            }) {
+                Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = "Next")
+            }
     })
 }

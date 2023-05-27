@@ -1,11 +1,12 @@
 package com.example.footballboard.screen
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.Window
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -74,7 +75,6 @@ fun AppScreen(
 
     val animatedNavController = rememberAnimatedNavController()
     val context = LocalContext.current
-    val activity = LocalContext.current as Activity
 
     Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
@@ -108,8 +108,13 @@ fun AppScreen(
                             )
                             isShowBottomBar.value = false
                         }
-                        composable(route = AREAS_INTEREST) {
-                            AreasInterest(context = context, mainApi = mainApi)
+                        composable(route = AREAS_INTEREST,
+                            exitTransition = { slideOutHorizontally(animationSpec = tween(250)) }) {
+                            AreasInterest(
+                                context = context,
+                                animatedNavController = animatedNavController,
+                                mainApi = mainApi
+                            )
                         }
                         composable(route = COMPETITIONS_INTEREST) {
                             CompetitionsInterest(context = context, mainApi = mainApi)
