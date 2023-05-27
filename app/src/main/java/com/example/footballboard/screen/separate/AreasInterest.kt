@@ -1,6 +1,8 @@
 package com.example.footballboard.screen.separate
 
 import android.content.Context
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,6 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AreasInterest(mainApi: MainApi, context: Context) {
     val areas = remember { mutableStateOf<List<Area>?>(null) }
+    val selected = remember { mutableStateOf(emptyList<Int>()) }
 
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -52,12 +56,31 @@ fun AreasInterest(mainApi: MainApi, context: Context) {
             item { Text(text = context.getString(R.string.areas_interest), fontSize = 16.sp) }
             areas.value?.let {
                 items(areas.value!!) {
+                    val index = areas.value!!.indexOf(it)
+                    val isSelected = selected.value.contains(index)
+
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Row(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    if (isSelected) MaterialTheme.colorScheme.onSurface
+                                    else MaterialTheme.colorScheme.surface
+                                )
+                                .clickable {
+                                    selected.value = if (isSelected) {
+                                        selected.value - index
+                                    } else {
+                                        selected.value + index
+                                    }
+                                },
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
-                            Text(text = it.name)
+                            Text(
+                                text = it.name,
+                                color = if (isSelected) MaterialTheme.colorScheme.surface
+                                else MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
                     Spacer(modifier = Modifier.size(10.dp))

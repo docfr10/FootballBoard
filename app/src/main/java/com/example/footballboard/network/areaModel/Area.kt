@@ -4,7 +4,7 @@ data class Area(
     val id: String,
     val name: String,
     val countryCode: String,
-    val flag: Any?,
+    val flag: String?,
     val parentAreaId: String,
     val parentArea: String
 )
