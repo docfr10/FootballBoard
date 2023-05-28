@@ -9,7 +9,7 @@ data class Competition(
     val name: String,
     val code: String,
     val type: String,
-    val emblem: Any?,
+    val emblem: String?,
     val plan: String,
     val currentSeason: CurrentSeason,
     val numberOfAvailableSeasons: Int,

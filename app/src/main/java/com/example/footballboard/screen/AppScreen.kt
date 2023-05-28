@@ -1,11 +1,12 @@
 package com.example.footballboard.screen
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.Window
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -39,8 +40,10 @@ import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
+import com.example.footballboard.screen.separate.AreasInterest
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.screen.separate.CompetitionsInterest
+import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.FAVORITES_SCREEN
@@ -72,7 +75,6 @@ fun AppScreen(
 
     val animatedNavController = rememberAnimatedNavController()
     val context = LocalContext.current
-    val activity = LocalContext.current as Activity
 
     Surface(color = MaterialTheme.colorScheme.background) {
         Scaffold(
@@ -85,7 +87,7 @@ fun AppScreen(
             content = { paddingValues ->
                 AnimatedNavHost(
                     navController = animatedNavController,
-                    startDestination = COMPETITIONS_INTEREST,
+                    startDestination = AREAS_INTEREST,
                     modifier = Modifier.padding(paddingValues = paddingValues),
                     builder = {
                         composable(route = SPLASH_SCREEN) {
@@ -105,6 +107,14 @@ fun AppScreen(
                                 window = window
                             )
                             isShowBottomBar.value = false
+                        }
+                        composable(route = AREAS_INTEREST,
+                            exitTransition = { slideOutHorizontally(animationSpec = tween(250)) }) {
+                            AreasInterest(
+                                context = context,
+                                animatedNavController = animatedNavController,
+                                mainApi = mainApi
+                            )
                         }
                         composable(route = COMPETITIONS_INTEREST) {
                             CompetitionsInterest(context = context, mainApi = mainApi)
