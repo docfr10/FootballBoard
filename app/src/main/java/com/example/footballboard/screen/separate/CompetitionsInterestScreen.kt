@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CompetitionsInterest(mainApi: MainApi, context: Context) {
+fun CompetitionsInterestScreen(mainApi: MainApi, context: Context) {
     val competitions = remember { mutableStateOf<List<Competition>?>(null) }
 
     LaunchedEffect(Unit) {

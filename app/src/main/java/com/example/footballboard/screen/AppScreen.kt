@@ -40,9 +40,9 @@ import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
 import com.example.footballboard.screen.separate.AnimatedSplashScreen
-import com.example.footballboard.screen.separate.AreasInterest
+import com.example.footballboard.screen.separate.AreasInterestScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
-import com.example.footballboard.screen.separate.CompetitionsInterest
+import com.example.footballboard.screen.separate.CompetitionsInterestScreen
 import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
@@ -51,6 +51,7 @@ import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.PROFILE_SCREEN
 import com.example.footballboard.utils.Routes.SEARCH_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
+import com.example.footballboard.viewModel.AreasInterestViewModel
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -68,7 +69,8 @@ fun AppScreen(
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
     authenticationViewModel: AuthenticationViewModel,
     profileViewModel: ProfileViewModel,
-    mainApi: MainApi
+    mainApi: MainApi,
+    areasInterestViewModel: AreasInterestViewModel
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -110,14 +112,15 @@ fun AppScreen(
                         }
                         composable(route = AREAS_INTEREST,
                             exitTransition = { slideOutHorizontally(animationSpec = tween(250)) }) {
-                            AreasInterest(
+                            AreasInterestScreen(
+                                areasInterestViewModel = areasInterestViewModel,
                                 context = context,
                                 animatedNavController = animatedNavController,
                                 mainApi = mainApi
                             )
                         }
                         composable(route = COMPETITIONS_INTEREST) {
-                            CompetitionsInterest(context = context, mainApi = mainApi)
+                            CompetitionsInterestScreen(context = context, mainApi = mainApi)
                         }
                         composable(route = HOME_SCREEN) {
                             HomeScreen(mainApi = mainApi)

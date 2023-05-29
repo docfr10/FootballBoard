@@ -1,4 +1,4 @@
-package com.example.footballboard
+package com.example.footballboard.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

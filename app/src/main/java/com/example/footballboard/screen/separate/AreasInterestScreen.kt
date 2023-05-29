@@ -35,15 +35,21 @@ import com.example.footballboard.R
 import com.example.footballboard.network.MainApi
 import com.example.footballboard.network.areaModel.Area
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
+import com.example.footballboard.viewModel.AreasInterestViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AreasInterest(mainApi: MainApi, context: Context, animatedNavController: NavHostController) {
+fun AreasInterestScreen(
+    mainApi: MainApi,
+    context: Context,
+    animatedNavController: NavHostController,
+    areasInterestViewModel: AreasInterestViewModel
+) {
     val areas = remember { mutableStateOf<List<Area>?>(null) }
-    val selected = remember { mutableStateOf(emptyList<Int>()) }
+    val selectedAreas = remember { mutableStateOf(emptyList<Int>()) }
 
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -64,7 +70,7 @@ fun AreasInterest(mainApi: MainApi, context: Context, animatedNavController: Nav
             areas.value?.let {
                 items(areas.value!!) {
                     val index = areas.value!!.indexOf(it)
-                    val isSelected = selected.value.contains(index)
+                    val isSelected = selectedAreas.value.contains(index)
 
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Row(
@@ -75,10 +81,10 @@ fun AreasInterest(mainApi: MainApi, context: Context, animatedNavController: Nav
                                     else MaterialTheme.colorScheme.surface
                                 )
                                 .clickable {
-                                    selected.value = if (isSelected) {
-                                        selected.value - index
+                                    selectedAreas.value = if (isSelected) {
+                                        selectedAreas.value - index
                                     } else {
-                                        selected.value + index
+                                        selectedAreas.value + index
                                     }
                                 },
                             horizontalArrangement = Arrangement.SpaceAround
@@ -95,9 +101,10 @@ fun AreasInterest(mainApi: MainApi, context: Context, animatedNavController: Nav
             }
         }
     }, floatingActionButton = {
-        if (selected.value.isNotEmpty())
+        if (selectedAreas.value.isNotEmpty())
         // Button to go to the selection of competitions
             FloatingActionButton(shape = CircleShape, onClick = {
+                areasInterestViewModel.addCompetitionsInterest(selectedAreas.value)
                 animatedNavController.navigate(COMPETITIONS_INTEREST)
             }) {
                 Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = "Next")
