@@ -10,13 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AreasInterestViewModel @Inject constructor() : ViewModel() {
+class CompetitionsInterestViewModel @Inject constructor() : ViewModel() {
     private val databaseReference = FirebaseDatabase.getInstance()
-        .getReference("USERS/${FirebaseAuth.getInstance().uid}/AreasInterest")
+        .getReference("USERS/${FirebaseAuth.getInstance().uid}/CompetitionsInterest")
 
-    fun addAreasInterest(selectedAreas: List<Int>) {
+    fun addCompetitionsInterest(selectedCompetitions: List<Int>) {
         viewModelScope.launch(Dispatchers.IO) {
-            selectedAreas.forEach {
+            selectedCompetitions.forEach {
                 databaseReference.child(it.toString()).setValue(it.toString())
             }
         }

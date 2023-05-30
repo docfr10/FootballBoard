@@ -104,7 +104,7 @@ fun AreasInterestScreen(
         if (selectedAreas.value.isNotEmpty())
         // Button to go to the selection of competitions
             FloatingActionButton(shape = CircleShape, onClick = {
-                areasInterestViewModel.addCompetitionsInterest(selectedAreas.value)
+                areasInterestViewModel.addAreasInterest(selectedAreas.value)
                 animatedNavController.navigate(COMPETITIONS_INTEREST)
             }) {
                 Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = "Next")

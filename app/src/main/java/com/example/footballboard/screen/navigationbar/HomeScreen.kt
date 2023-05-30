@@ -31,7 +31,6 @@ fun HomeScreen(mainApi: MainApi) {
                 .padding(paddingValues)
                 .padding(horizontal = 10.dp, vertical = 10.dp)
         ) {
-
             item {
                 Column(
                     Modifier

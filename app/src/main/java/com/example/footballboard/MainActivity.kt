@@ -12,6 +12,7 @@ import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
 import com.example.footballboard.viewModel.AreasInterestViewModel
 import com.example.footballboard.viewModel.AuthenticationViewModel
+import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
     // ViewModel objects
     private val areasInterestViewModel: AreasInterestViewModel by viewModels()
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
+    private val competitionsInterestViewModel: CompetitionsInterestViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
 
     private val retrofit = Retrofit.Builder()
@@ -58,6 +60,7 @@ class MainActivity : ComponentActivity() {
                     auth = auth,
                     areasInterestViewModel = areasInterestViewModel,
                     authenticationViewModel = authenticationViewModel,
+                    competitionsInterestViewModel = competitionsInterestViewModel,
                     cUser = cUser,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     profileViewModel = profileViewModel,

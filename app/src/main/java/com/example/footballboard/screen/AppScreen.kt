@@ -53,6 +53,7 @@ import com.example.footballboard.utils.Routes.SEARCH_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
 import com.example.footballboard.viewModel.AreasInterestViewModel
 import com.example.footballboard.viewModel.AuthenticationViewModel
+import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -69,8 +70,9 @@ fun AppScreen(
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
     authenticationViewModel: AuthenticationViewModel,
     profileViewModel: ProfileViewModel,
-    mainApi: MainApi,
-    areasInterestViewModel: AreasInterestViewModel
+    areasInterestViewModel: AreasInterestViewModel,
+    competitionsInterestViewModel: CompetitionsInterestViewModel,
+    mainApi: MainApi
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -120,7 +122,12 @@ fun AppScreen(
                             )
                         }
                         composable(route = COMPETITIONS_INTEREST) {
-                            CompetitionsInterestScreen(context = context, mainApi = mainApi)
+                            CompetitionsInterestScreen(
+                                animatedNavController = animatedNavController,
+                                context = context,
+                                competitionsInterestViewModel = competitionsInterestViewModel,
+                                mainApi = mainApi
+                            )
                         }
                         composable(route = HOME_SCREEN) {
                             HomeScreen(mainApi = mainApi)
