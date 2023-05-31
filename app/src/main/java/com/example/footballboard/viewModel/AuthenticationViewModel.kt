@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavHostController
 import com.example.footballboard.MainActivity
 import com.example.footballboard.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn

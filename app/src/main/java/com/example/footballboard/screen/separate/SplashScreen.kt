@@ -1,5 +1,6 @@
 package com.example.footballboard.screen.separate
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -19,13 +20,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.footballboard.R
+import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.HOME_SCREEN
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.delay
 
 @Composable
-fun AnimatedSplashScreen(cUser: FirebaseUser?, animatedNavController: NavHostController) {
+fun SplashScreen(
+    cUser: FirebaseUser?,
+    animatedNavController: NavHostController,
+    databaseInstance: FirebaseDatabase
+) {
     val startAnimation = remember { mutableStateOf(false) }
     val alphaAnim = animateFloatAsState(
         targetValue = if (startAnimation.value) 1f else 0f,
@@ -36,9 +47,22 @@ fun AnimatedSplashScreen(cUser: FirebaseUser?, animatedNavController: NavHostCon
         startAnimation.value = true
         delay(4000)
         animatedNavController.popBackStack()
-        if (cUser != null)
-            animatedNavController.navigate(HOME_SCREEN)
-        else
+        if (cUser != null) {
+            databaseInstance.getReference("USERS/${FirebaseAuth.getInstance().uid}/CompetitionsInterest")
+                .addListenerForSingleValueEvent(
+                    object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.exists())
+                                animatedNavController.navigate(HOME_SCREEN)
+                            else
+                                animatedNavController.navigate(AREAS_INTEREST)
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Log.e("ERROR", databaseError.toString())
+                        }
+                    })
+        } else
             animatedNavController.navigate(AUTHENTICATION_SCREEN)
     }
     SplashScreen(alphaAnim = alphaAnim.value)

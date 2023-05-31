@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : ComponentActivity() {
     // Firebase objects
     private val auth = FirebaseAuth.getInstance()
+    private val databaseInstance = FirebaseDatabase.getInstance()
     private var cUser = auth.currentUser
     private val signInWithGoogleLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -62,6 +64,7 @@ class MainActivity : ComponentActivity() {
                     authenticationViewModel = authenticationViewModel,
                     competitionsInterestViewModel = competitionsInterestViewModel,
                     cUser = cUser,
+                    databaseInstance = databaseInstance,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     profileViewModel = profileViewModel,
                     mainApi = mainApi,

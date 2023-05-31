@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "367052701724",
+    "firebase_url": "https://footballboard-c0fae-default-rtdb.firebaseio.com",
     "project_id": "footballboard-c0fae",
     "storage_bucket": "footballboard-c0fae.appspot.com"
   },
@@ -22,7 +23,7 @@
           }
         },
         {
-          "client_id": "367052701724-6pjtfrjsh1rt7g7m8jfiqdomh0if3jh7.apps.googleusercontent.com",
+          "client_id": "367052701724-784rbquc39dcmhvdc0u84s2npagcbg9m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

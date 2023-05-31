@@ -39,10 +39,10 @@ import com.example.footballboard.screen.navigationbar.FavoritesScreen
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
-import com.example.footballboard.screen.separate.AnimatedSplashScreen
 import com.example.footballboard.screen.separate.AreasInterestScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.screen.separate.CompetitionsInterestScreen
+import com.example.footballboard.screen.separate.SplashScreen
 import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
@@ -60,6 +60,7 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
@@ -72,7 +73,8 @@ fun AppScreen(
     profileViewModel: ProfileViewModel,
     areasInterestViewModel: AreasInterestViewModel,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
-    mainApi: MainApi
+    mainApi: MainApi,
+    databaseInstance: FirebaseDatabase
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -91,13 +93,14 @@ fun AppScreen(
             content = { paddingValues ->
                 AnimatedNavHost(
                     navController = animatedNavController,
-                    startDestination = AREAS_INTEREST,
+                    startDestination = SPLASH_SCREEN,
                     modifier = Modifier.padding(paddingValues = paddingValues),
                     builder = {
                         composable(route = SPLASH_SCREEN) {
-                            AnimatedSplashScreen(
+                            SplashScreen(
                                 animatedNavController = animatedNavController,
-                                cUser = cUser
+                                cUser = cUser,
+                                databaseInstance = databaseInstance
                             )
                             isShowBottomBar.value = false
                         }
