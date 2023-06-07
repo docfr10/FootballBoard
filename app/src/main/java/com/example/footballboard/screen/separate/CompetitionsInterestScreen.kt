@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.footballboard.R
 import com.example.footballboard.network.MainApi
 import com.example.footballboard.network.competitionModel.Competition
@@ -40,7 +42,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun CompetitionsInterestScreen(
     mainApi: MainApi,
@@ -91,6 +93,7 @@ fun CompetitionsInterestScreen(
                                 },
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
+                            GlideImage(model = it.emblem, contentDescription = "Competition emblem")
                             Text(
                                 text = it.name,
                                 color = if (isSelected) MaterialTheme.colorScheme.surface
