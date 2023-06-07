@@ -20,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.footballboard.R
-import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
+import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -55,7 +55,7 @@ fun SplashScreen(
                             if (dataSnapshot.exists())
                                 animatedNavController.navigate(HOME_SCREEN)
                             else
-                                animatedNavController.navigate(AREAS_INTEREST)
+                                animatedNavController.navigate(COMPETITIONS_INTEREST)
                         }
 
                         override fun onCancelled(databaseError: DatabaseError) {

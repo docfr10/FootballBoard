@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import com.example.footballboard.network.MainApi
 import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
-import com.example.footballboard.viewModel.AreasInterestViewModel
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
@@ -43,7 +42,6 @@ class MainActivity : ComponentActivity() {
         }
 
     // ViewModel objects
-    private val areasInterestViewModel: AreasInterestViewModel by viewModels()
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
     private val competitionsInterestViewModel: CompetitionsInterestViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
@@ -60,7 +58,6 @@ class MainActivity : ComponentActivity() {
             FootballBoardTheme {
                 AppScreen(
                     auth = auth,
-                    areasInterestViewModel = areasInterestViewModel,
                     authenticationViewModel = authenticationViewModel,
                     competitionsInterestViewModel = competitionsInterestViewModel,
                     cUser = cUser,

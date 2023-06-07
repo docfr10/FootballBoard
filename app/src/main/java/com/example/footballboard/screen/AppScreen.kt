@@ -5,8 +5,6 @@ import android.content.Intent
 import android.view.Window
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -39,11 +37,9 @@ import com.example.footballboard.screen.navigationbar.FavoritesScreen
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
-import com.example.footballboard.screen.separate.AreasInterestScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.screen.separate.CompetitionsInterestScreen
 import com.example.footballboard.screen.separate.SplashScreen
-import com.example.footballboard.utils.Routes.AREAS_INTEREST
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.FAVORITES_SCREEN
@@ -51,7 +47,6 @@ import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.utils.Routes.PROFILE_SCREEN
 import com.example.footballboard.utils.Routes.SEARCH_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
-import com.example.footballboard.viewModel.AreasInterestViewModel
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
@@ -71,7 +66,6 @@ fun AppScreen(
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
     authenticationViewModel: AuthenticationViewModel,
     profileViewModel: ProfileViewModel,
-    areasInterestViewModel: AreasInterestViewModel,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
     mainApi: MainApi,
     databaseInstance: FirebaseDatabase
@@ -108,21 +102,11 @@ fun AppScreen(
                             AuthenticationScreen(
                                 auth = auth,
                                 authenticationViewModel = authenticationViewModel,
-                                animatedNavController = animatedNavController,
                                 context = context,
                                 signInWithGoogleLauncher = signInWithGoogleLauncher,
                                 window = window
                             )
                             isShowBottomBar.value = false
-                        }
-                        composable(route = AREAS_INTEREST,
-                            exitTransition = { slideOutHorizontally(animationSpec = tween(250)) }) {
-                            AreasInterestScreen(
-                                areasInterestViewModel = areasInterestViewModel,
-                                context = context,
-                                animatedNavController = animatedNavController,
-                                mainApi = mainApi
-                            )
                         }
                         composable(route = COMPETITIONS_INTEREST) {
                             CompetitionsInterestScreen(

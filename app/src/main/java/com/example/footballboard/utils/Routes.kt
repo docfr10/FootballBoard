@@ -7,6 +7,5 @@ object Routes {
     const val PROFILE_SCREEN = "profile"
     const val FAVORITES_SCREEN = "favorites"
     const val SEARCH_SCREEN = "search"
-    const val AREAS_INTEREST = "areasInterest"
     const val COMPETITIONS_INTEREST = "competitionsInterest"
 }

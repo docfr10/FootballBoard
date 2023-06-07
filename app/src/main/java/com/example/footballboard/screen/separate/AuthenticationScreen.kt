@@ -23,7 +23,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.example.footballboard.R
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +31,6 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun AuthenticationScreen(
     auth: FirebaseAuth,
-    animatedNavController: NavHostController,
     context: Context,
     window: Window,
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
