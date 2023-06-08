@@ -38,8 +38,8 @@ import com.example.footballboard.screen.navigationbar.ProfileScreen
 import com.example.footballboard.screen.navigationbar.SearchScreen
 import com.example.footballboard.screen.separate.AuthenticationScreen
 import com.example.footballboard.screen.separate.CompetitionsInterestScreen
+import com.example.footballboard.screen.separate.FavoriteTeamsScreen
 import com.example.footballboard.screen.separate.SplashScreen
-import com.example.footballboard.screen.separate.TeamsInterestScreen
 import com.example.footballboard.utils.Routes.AUTHENTICATION_SCREEN
 import com.example.footballboard.utils.Routes.COMPETITIONS_INTEREST
 import com.example.footballboard.utils.Routes.FAVORITES_SCREEN
@@ -50,9 +50,9 @@ import com.example.footballboard.utils.Routes.SPLASH_SCREEN
 import com.example.footballboard.utils.Routes.TEAMS_INTEREST
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
+import com.example.footballboard.viewModel.FavoriteTeamsViewModel
 import com.example.footballboard.viewModel.MainActivityViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
-import com.example.footballboard.viewModel.TeamsInterestViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -66,7 +66,7 @@ fun AppScreen(
     profileViewModel: ProfileViewModel,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
     mainActivityViewModel: MainActivityViewModel,
-    teamsInterestViewModel: TeamsInterestViewModel
+    favoriteTeamsViewModel: FavoriteTeamsViewModel
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -114,10 +114,10 @@ fun AppScreen(
                             )
                         }
                         composable(route = TEAMS_INTEREST) {
-                            TeamsInterestScreen(
+                            FavoriteTeamsScreen(
                                 animatedNavController = animatedNavController,
                                 context = context,
-                                teamsInterestViewModel = teamsInterestViewModel
+                                favoriteTeamsViewModel = favoriteTeamsViewModel
                             )
                         }
                         composable(route = HOME_SCREEN) {

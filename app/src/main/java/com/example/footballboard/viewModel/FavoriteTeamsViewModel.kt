@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamsInterestViewModel @Inject constructor(private val mainApi: MainApi) : ViewModel() {
+class FavoriteTeamsViewModel @Inject constructor(private val mainApi: MainApi) : ViewModel() {
     private val databaseReference = FirebaseDatabase.getInstance()
         .getReference("USERS/${FirebaseAuth.getInstance().uid}/TeamsInterest")
 

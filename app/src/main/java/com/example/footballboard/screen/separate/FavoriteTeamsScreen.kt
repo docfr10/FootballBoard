@@ -36,16 +36,16 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.footballboard.R
 import com.example.footballboard.network.teamModel.Team
 import com.example.footballboard.utils.Routes
-import com.example.footballboard.viewModel.TeamsInterestViewModel
+import com.example.footballboard.viewModel.FavoriteTeamsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun TeamsInterestScreen(
+fun FavoriteTeamsScreen(
     context: Context,
-    teamsInterestViewModel: TeamsInterestViewModel,
+    favoriteTeamsViewModel: FavoriteTeamsViewModel,
     animatedNavController: NavHostController
 ) {
     val teams = remember { mutableStateOf<List<Team>?>(null) }
@@ -53,7 +53,7 @@ fun TeamsInterestScreen(
 
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            teams.value = teamsInterestViewModel.getAllTeams()
+            teams.value = favoriteTeamsViewModel.getAllTeams()
         }
     }
 
@@ -67,7 +67,7 @@ fun TeamsInterestScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
-                Text(text = context.getString(R.string.teams_interest), fontSize = 16.sp)
+                Text(text = context.getString(R.string.favorite_teams), fontSize = 16.sp)
             }
             teams.value?.let {
                 items(teams.value!!) {
@@ -107,7 +107,7 @@ fun TeamsInterestScreen(
         if (selectedTeams.value.isNotEmpty())
         // Button to go to the selection of competitions
             FloatingActionButton(shape = CircleShape, onClick = {
-                teamsInterestViewModel.addTeamsInterest(selectedTeams.value)
+                favoriteTeamsViewModel.addTeamsInterest(selectedTeams.value)
                 animatedNavController.navigate(Routes.HOME_SCREEN) {
                     popUpTo(animatedNavController.graph.id) { inclusive = true }
                 }
