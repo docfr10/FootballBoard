@@ -13,6 +13,7 @@ import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import com.example.footballboard.viewModel.MainActivityViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
+import com.example.footballboard.viewModel.TeamsInterestViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
                 val authenticationViewModel = hiltViewModel<AuthenticationViewModel>()
                 val competitionsInterestViewModel = hiltViewModel<CompetitionsInterestViewModel>()
                 val profileViewModel = hiltViewModel<ProfileViewModel>()
+                val teamsInterestViewModel = hiltViewModel<TeamsInterestViewModel>()
 
                 AppScreen(
                     authenticationViewModel = authenticationViewModel,
@@ -54,6 +56,7 @@ class MainActivity : ComponentActivity() {
                     mainActivityViewModel = mainActivityViewModel,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     profileViewModel = profileViewModel,
+                    teamsInterestViewModel = teamsInterestViewModel,
                     window = window
                 )
             }

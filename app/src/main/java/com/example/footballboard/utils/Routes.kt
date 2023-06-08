@@ -8,4 +8,5 @@ object Routes {
     const val FAVORITES_SCREEN = "favorites"
     const val SEARCH_SCREEN = "search"
     const val COMPETITIONS_INTEREST = "competitionsInterest"
+    const val TEAMS_INTEREST = "teamsInterest"
 }

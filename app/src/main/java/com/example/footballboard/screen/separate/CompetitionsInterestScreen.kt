@@ -35,7 +35,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.footballboard.R
 import com.example.footballboard.network.competitionModel.Competition
-import com.example.footballboard.utils.Routes.HOME_SCREEN
+import com.example.footballboard.utils.Routes.TEAMS_INTEREST
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -108,7 +108,7 @@ fun CompetitionsInterestScreen(
         // Button to go to the selection of competitions
             FloatingActionButton(shape = CircleShape, onClick = {
                 competitionsInterestViewModel.addCompetitionsInterest(selectedCompetitions.value)
-                animatedNavController.navigate(HOME_SCREEN) {
+                animatedNavController.navigate(TEAMS_INTEREST) {
                     popUpTo(animatedNavController.graph.id) { inclusive = true }
                 }
             }) {
