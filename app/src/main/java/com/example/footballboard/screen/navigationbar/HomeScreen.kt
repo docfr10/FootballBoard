@@ -19,11 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.footballboard.network.MainApi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(mainApi: MainApi) {
+fun HomeScreen() {
     Scaffold(content = { paddingValues ->
         LazyColumn(
             modifier = Modifier

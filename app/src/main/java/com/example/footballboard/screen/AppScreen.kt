@@ -32,7 +32,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.footballboard.R
 import com.example.footballboard.model.navigationbar.BottomNavItemModel
-import com.example.footballboard.network.MainApi
 import com.example.footballboard.screen.navigationbar.FavoritesScreen
 import com.example.footballboard.screen.navigationbar.HomeScreen
 import com.example.footballboard.screen.navigationbar.ProfileScreen
@@ -67,7 +66,6 @@ fun AppScreen(
     authenticationViewModel: AuthenticationViewModel,
     profileViewModel: ProfileViewModel,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
-    mainApi: MainApi,
     databaseInstance: FirebaseDatabase
 ) {
     // Hiding the bottom bar
@@ -112,12 +110,11 @@ fun AppScreen(
                             CompetitionsInterestScreen(
                                 animatedNavController = animatedNavController,
                                 context = context,
-                                competitionsInterestViewModel = competitionsInterestViewModel,
-                                mainApi = mainApi
+                                competitionsInterestViewModel = competitionsInterestViewModel
                             )
                         }
                         composable(route = HOME_SCREEN) {
-                            HomeScreen(mainApi = mainApi)
+                            HomeScreen()
                             isShowBottomBar.value = true
                         }
                         composable(route = FAVORITES_SCREEN) {

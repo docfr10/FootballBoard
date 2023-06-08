@@ -6,8 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import com.example.footballboard.network.MainApi
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.footballboard.screen.AppScreen
 import com.example.footballboard.ui.theme.FootballBoardTheme
 import com.example.footballboard.viewModel.AuthenticationViewModel
@@ -19,8 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -41,21 +38,15 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-    // ViewModel objects
-    private val authenticationViewModel: AuthenticationViewModel by viewModels()
-    private val competitionsInterestViewModel: CompetitionsInterestViewModel by viewModels()
-    private val profileViewModel: ProfileViewModel by viewModels()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://api.football-data.org/v4/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    private val mainApi = retrofit.create(MainApi::class.java)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FootballBoardTheme {
+                // ViewModel objects
+                val authenticationViewModel = hiltViewModel<AuthenticationViewModel>()
+                val competitionsInterestViewModel = hiltViewModel<CompetitionsInterestViewModel>()
+                val profileViewModel = hiltViewModel<ProfileViewModel>()
+
                 AppScreen(
                     auth = auth,
                     authenticationViewModel = authenticationViewModel,
@@ -64,7 +55,6 @@ class MainActivity : ComponentActivity() {
                     databaseInstance = databaseInstance,
                     signInWithGoogleLauncher = signInWithGoogleLauncher,
                     profileViewModel = profileViewModel,
-                    mainApi = mainApi,
                     window = window
                 )
             }

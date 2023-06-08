@@ -34,7 +34,6 @@ import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.footballboard.R
-import com.example.footballboard.network.MainApi
 import com.example.footballboard.network.competitionModel.Competition
 import com.example.footballboard.utils.Routes.HOME_SCREEN
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
@@ -45,7 +44,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun CompetitionsInterestScreen(
-    mainApi: MainApi,
     context: Context,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
     animatedNavController: NavHostController
@@ -55,7 +53,7 @@ fun CompetitionsInterestScreen(
 
     LaunchedEffect(Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            competitions.value = mainApi.getAllCompetitions().competitions
+            competitions.value = competitionsInterestViewModel.getAllCompetitions()
         }
     }
 
