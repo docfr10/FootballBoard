@@ -48,25 +48,21 @@ import com.example.footballboard.utils.Routes.SEARCH_SCREEN
 import com.example.footballboard.utils.Routes.SPLASH_SCREEN
 import com.example.footballboard.viewModel.AuthenticationViewModel
 import com.example.footballboard.viewModel.CompetitionsInterestViewModel
+import com.example.footballboard.viewModel.MainActivityViewModel
 import com.example.footballboard.viewModel.ProfileViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun AppScreen(
-    auth: FirebaseAuth,
-    cUser: FirebaseUser?,
     window: Window,
     signInWithGoogleLauncher: ActivityResultLauncher<Intent>,
     authenticationViewModel: AuthenticationViewModel,
     profileViewModel: ProfileViewModel,
     competitionsInterestViewModel: CompetitionsInterestViewModel,
-    databaseInstance: FirebaseDatabase
+    mainActivityViewModel: MainActivityViewModel
 ) {
     // Hiding the bottom bar
     val isShowBottomBar = remember { mutableStateOf(false) }
@@ -91,14 +87,14 @@ fun AppScreen(
                         composable(route = SPLASH_SCREEN) {
                             SplashScreen(
                                 animatedNavController = animatedNavController,
-                                cUser = cUser,
-                                databaseInstance = databaseInstance
+                                cUser = mainActivityViewModel.getCUser(),
+                                databaseInstance = mainActivityViewModel.getDatabaseInstance()
                             )
                             isShowBottomBar.value = false
                         }
                         composable(route = AUTHENTICATION_SCREEN) {
                             AuthenticationScreen(
-                                auth = auth,
+                                auth = mainActivityViewModel.getAuth(),
                                 authenticationViewModel = authenticationViewModel,
                                 context = context,
                                 signInWithGoogleLauncher = signInWithGoogleLauncher,
@@ -128,9 +124,9 @@ fun AppScreen(
                         composable(route = PROFILE_SCREEN) {
                             ProfileScreen(
                                 animatedNavController = animatedNavController,
-                                auth = auth,
+                                auth = mainActivityViewModel.getAuth(),
                                 context = context,
-                                cUser = cUser,
+                                cUser = mainActivityViewModel.getCUser(),
                                 profileViewModel = profileViewModel,
                             )
                             isShowBottomBar.value = true
